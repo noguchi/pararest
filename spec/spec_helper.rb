@@ -2,7 +2,7 @@ require 'simplecov'
 require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.start 'rails' do
-  add_filter "/spec/"
+#  add_filter "/spec/"
 end
 
 RSpec.configure do |config|
