@@ -1,9 +1,7 @@
 require 'simplecov'
 require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-SimpleCov.start 'rails' do
-#  add_filter "/spec/"
-end
+SimpleCov.start
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
