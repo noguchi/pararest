@@ -6,6 +6,7 @@ gem 'simplecov-rcov', require: false
 gem 'rspec'
 gem 'webmock', require: false
 gem 'ci_reporter'
+gem 'spring'
 gem 'guard-rspec'
 gem 'coveralls', require: false
 
