@@ -1,16 +1,16 @@
 require "spec_helper"
-require "pararest/request"
+require "pararest/request/base"
 
 module Pararest
-  describe Request do
+  describe Request::Base do
     context 'www.google.comへのRequest作成後' do
-      subject { Request.new("http://www.google.com/") }
+      subject { Request::Base.new("http://www.google.com/") }
 
-      describe 'Request#url' do
+      describe 'Request::Base#url' do
         it { expect(subject.url).to eq "http://www.google.com/" }
       end
 
-      describe 'Request#response' do
+      describe 'Request::Base#response' do
         it { expect(subject.params).to be_empty }
       end
     end

@@ -1,27 +1,57 @@
+require 'singleton'
 require 'faraday'
-require 'faraday_middleware'
-require 'pararest/request'
+require 'pararest/request/base'
 
 module Pararest
   class Client
+    class Configuration
+      include Singleton
+
+      attr_accessor :yahoo_japan_appid, :valuecommerce_pid, :valuecommerce_sid
+      attr_accessor :timeout, :open_timeout
+
+      @@defaults = {
+        yahoo_japan_appid: nil,
+        valuecommerce_pid: nil,
+        valuecommerce_sid: nil,
+        timeout: 4,
+        open_timeout: 2,
+      }
+
+      def self.defaults
+        @@defaults
+      end
+
+      def initialize
+        @@defaults.each_pair{|k,v| self.send("#{k}=",v)}
+      end
+    end
+
+    def self.config
+      Configuration.instance
+    end
+
+    def self.configure
+      yield config
+    end
+
     attr_reader :requests, :options
 
     def initialize(options = {})
       @requests = []
       @options = {
-        timeout: 4,
-        open_timeout: 2,
+        timeout: Client.config.timeout,
+        open_timeout: Client.config.open_timeout,
         }.merge(options)
       @connection = Faraday.new do |builder|
         builder.use Faraday::Adapter::EMHttp
-        builder.response :xml, content_type: /\bxml$/
 #        builder.response :logger
       end
       @connection.options.merge(@options)
     end
 
     def add_get(url)
-      add Request.new(url)
+      add Request::Base.new(url)
     end
 
     def add(request)
