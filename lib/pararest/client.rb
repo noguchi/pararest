@@ -41,7 +41,7 @@ module Pararest
         }.merge(options)
       @connection = Faraday.new do |builder|
         builder.use Faraday::Adapter::EMHttp
-#        builder.response :logger
+ #       builder.response :logger
       end
       @connection.options.merge(@options)
     end
