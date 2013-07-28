@@ -7,13 +7,9 @@ module Pararest
     class Configuration
       include Singleton
 
-      attr_accessor :yahoo_japan_appid, :valuecommerce_pid, :valuecommerce_sid
       attr_accessor :timeout, :open_timeout
 
       @@defaults = {
-        yahoo_japan_appid: nil,
-        valuecommerce_pid: nil,
-        valuecommerce_sid: nil,
         timeout: 4,
         open_timeout: 2,
       }
