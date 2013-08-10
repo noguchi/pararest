@@ -1,6 +1,3 @@
-require 'multi_json'
-require 'awesome_print'
-
 module Pararest
   module Request
     class Rakuten < Base
@@ -53,7 +50,13 @@ module Pararest
         return a unless (response && response.body['Items'])
         response.body['Items'].each {|e|
           item = e['Item']
-          a << item
+          m = Hashie::Mash.new
+          m.title = item['itemName']
+          m.url = item['itemUrl']
+          m.price = item['itemPrice'].to_i
+          m.image_url = item['mediumImageUrls'].first['imageUrl']
+          m.beacon_url = nil
+          a << m
         }
         a
       end

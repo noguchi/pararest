@@ -1,10 +1,10 @@
 require "spec_helper"
-require "pararest/request/rakuten"
+require "pararest"
 
 module Pararest
   describe Request::Rakuten do
     Request::Rakuten.configure do |c|
-      c.application_id = "bcb94d46f956a4dc09f29b9557b592f9"
+      c.application_id = "1234567890acbdefghijklmnopqrstuv"
       c.affiliate_id = ""
     end
 
@@ -17,7 +17,7 @@ module Pararest
 
       describe 'Rakuten#params' do
         it { expect(subject.params).to include(
-          "applicationId" => "bcb94d46f956a4dc09f29b9557b592f9",
+          "applicationId" => "1234567890acbdefghijklmnopqrstuv",
           "genreId" => "100083",
           "keyword" => "nikon d800",
         ) }

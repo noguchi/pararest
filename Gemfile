@@ -5,10 +5,10 @@ gem 'simplecov', require: false
 gem 'simplecov-rcov', require: false
 gem 'rspec'
 gem 'guard-rspec'
-gem 'webmock', require: false
+gem 'webmock', '< 1.12.0', require: false
 gem 'vcr'
 gem 'ci_reporter'
-gem 'awesome_print'
+gem 'activesupport'
 gem 'coveralls', require: false
 
 gemspec

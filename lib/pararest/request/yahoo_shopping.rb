@@ -1,6 +1,3 @@
-require 'multi_json'
-require 'awesome_print'
-
 module Pararest
   module Request
     class YahooShopping < Base
@@ -62,8 +59,13 @@ module Pararest
         return a unless (response && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result'])
         response.body['ResultSet']['0']['Result'].each {|key, item|
           next unless /^\d+$/ =~ key
-          item['BeaconUrl'] = beacon_url
-          a << item
+          m = Hashie::Mash.new
+          m.title = item['Name']
+          m.url = item['Url']
+          m.price = item['Price']['_value'].to_i
+          m.image_url = item['Image']['Medium']
+          m.beacon_url = beacon_url
+          a << m
         }
         a
       end

@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 10 Aug 2013 07:17:50 GMT
+      - Sat, 10 Aug 2013 07:37:49 GMT
       Cache-Control:
       - no-cache, private
       - no-store, must-revalidate
@@ -89,5 +89,5 @@ http_interactions:
         EN-EL15 \u4e92\u63db\u30d0\u30c3\u30c6\u30ea\u30fc","CategoryId":"2084261636","Seller":{"Id":"nine_gate_shop","ItemListUrl":"http:\/\/auctions.yahooapis.jp\/AuctionWebService\/V2\/sellingList?sellerID=nine_gate_shop","RatingUrl":"http:\/\/auctions.yahooapis.jp\/AuctionWebService\/V1\/ShowRating?id=nine_gate_shop"},"ItemUrl":"http:\/\/auctions.yahooapis.jp\/AuctionWebService\/V2\/auctionItem?auctionID=c414081821","AuctionItemUrl":"http:\/\/page3.auctions.yahoo.co.jp\/jp\/auction\/c414081821","Image":"http:\/\/auctions.c.yimg.jp\/f29batchimg.auctions.yahoo.co.jp\/users\/8\/3\/7\/6\/nine_gate_shop-thumb-1375959270193623.jpg","CurrentPrice":"2280.00","Bids":"0","EndTime":"2013-08-11T00:22:47+09:00","BidOrBuy":"2280.00","IsReserved":"false","CharityOption":{"Proportion":"0"},"Affiliate":{"Rate":"1"},"Option":{"StoreIcon":"http:\/\/image.auctions.yahoo.co.jp\/images\/premium.gif","NewItemIcon":"http:\/\/image.auctions.yahoo.co.jp\/images\/gift\/c_attention_01.gif","BuynowIcon":"http:\/\/image.auctions.yahoo.co.jp\/images\/buynow.gif","EasyPaymentIcon":"http:\/\/i.yimg.jp\/images\/pay\/icon_s16.gif","IsBold":"false","IsBackGroundColor":"false","IsOffer":"false","IsCharity":"false"},"IsAdult":"false"},{"AuctionID":"f129016459","Title":"\u2605Nikon\u2605
         \u30cb\u30b3\u30f3D800 \u30b9\u30fc\u30d1\u30fc\u30d6\u30c3\u30af \u6a5f\u80fd\u89e3\u8aac\u7de8\u266a","CategoryId":"2084261636","Seller":{"Id":"airplane2124","ItemListUrl":"http:\/\/auctions.yahooapis.jp\/AuctionWebService\/V2\/sellingList?sellerID=airplane2124","RatingUrl":"http:\/\/auctions.yahooapis.jp\/AuctionWebService\/V1\/ShowRating?id=airplane2124"},"ItemUrl":"http:\/\/auctions.yahooapis.jp\/AuctionWebService\/V2\/auctionItem?auctionID=f129016459","AuctionItemUrl":"http:\/\/page6.auctions.yahoo.co.jp\/jp\/auction\/f129016459","Image":"http:\/\/auctions.c.yimg.jp\/img261.auctions.yahoo.co.jp\/users\/9\/4\/0\/1\/airplane2124-thumb-1369737433998808.jpg","CurrentPrice":"3600.00","Bids":"0","EndTime":"2013-08-10T23:48:30+09:00","BidOrBuy":"4200.00","IsReserved":"false","CharityOption":{"Proportion":"0"},"Option":{"BuynowIcon":"http:\/\/image.auctions.yahoo.co.jp\/images\/buynow.gif","EasyPaymentIcon":"http:\/\/i.yimg.jp\/images\/pay\/icon_s16.gif","IsBold":"false","IsBackGroundColor":"false","IsOffer":"false","IsCharity":"false"},"IsAdult":"false"}]}}})
     http_version: 
-  recorded_at: Sat, 10 Aug 2013 07:17:50 GMT
+  recorded_at: Sat, 10 Aug 2013 07:37:50 GMT
 recorded_with: VCR 2.5.0

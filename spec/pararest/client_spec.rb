@@ -1,5 +1,5 @@
 require "spec_helper"
-require "pararest/client"
+require "pararest"
 
 module Pararest
   describe Client do

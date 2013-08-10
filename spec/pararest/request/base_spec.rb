@@ -1,5 +1,5 @@
 require "spec_helper"
-require "pararest/request/base"
+require "pararest"
 
 module Pararest
   describe Request::Base do

@@ -1,8 +1,3 @@
-require 'singleton'
-require 'faraday'
-require 'typhoeus/adapters/faraday'
-require 'pararest/request/base'
-
 module Pararest
   class Client
     class Configuration

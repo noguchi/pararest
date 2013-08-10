@@ -1,6 +1,3 @@
-require 'multi_json'
-require 'awesome_print'
-
 module Pararest
   module Request
     class YahooAuctions < Base
@@ -69,9 +66,15 @@ module Pararest
         a = []
         return a unless (response && response.body['ResultSet'] && response.body['ResultSet']['Result'] && response.body['ResultSet']['Result']['Item'])
         response.body['ResultSet']['Result']['Item'].each {|item|
-          item['AuctionItemUrl'] = referer_url(item['AuctionItemUrl'])
-          item['BeaconUrl'] = beacon_url
-          a << item
+          m = Hashie::Mash.new
+          m.title = item['Title']
+          m.url = referer_url(item['AuctionItemUrl'])
+          m.price = item['CurrentPrice'].to_i
+          m.image_url = item['Image']
+          m.beacon_url = beacon_url
+          m.bids = item['Bids']
+          m.end_time = item['EndTime']
+          a << m
         }
         a
       end

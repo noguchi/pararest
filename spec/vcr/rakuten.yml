@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130424?affiliateId=&applicationId=bcb94d46f956a4dc09f29b9557b592f9&callback=loaded&genreId=100083&keyword=nikon%20d800&sort=standard
+    uri: https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130424?affiliateId=&applicationId=1234567890acbdefghijklmnopqrstuv&callback=loaded&genreId=100083&keyword=nikon%20d800&sort=standard
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 10 Aug 2013 07:17:50 GMT
+      - Sat, 10 Aug 2013 07:37:49 GMT
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
@@ -2547,5 +2547,5 @@ http_interactions:
         LmpwL21pa2FzYWNhbWVyYS8iLCJnZW5yZUlkIjoiMjEzMjk3In19XSwiR2Vu
         cmVJbmZvcm1hdGlvbiI6W119KTs=
     http_version: 
-  recorded_at: Sat, 10 Aug 2013 07:17:50 GMT
+  recorded_at: Sat, 10 Aug 2013 07:37:49 GMT
 recorded_with: VCR 2.5.0

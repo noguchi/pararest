@@ -1,5 +1,5 @@
 require "spec_helper"
-require "pararest/request/yahoo_shopping"
+require "pararest"
 
 module Pararest
   describe Request::YahooShopping do
