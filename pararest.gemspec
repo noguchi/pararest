@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Shingo Noguchi"]
   spec.email         = ["noguchi@daifukuya.com"]
   spec.description   = %q{Paralell REST Web API Client}
-  spec.summary       = %q{Supports Y!J Auctions/Y!J Shopping, Rakuten, Amazon}
+  spec.summary       = %q{Supports Y!J Auctions/Shopping, Rakuten}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency 'faraday'
-  spec.add_development_dependency 'em-http-request'
+#  spec.add_development_dependency 'em-http-request'
+  spec.add_development_dependency 'typhoeus'
   spec.add_development_dependency 'multi_json'
 end

@@ -27,9 +27,11 @@ module Pararest
 
     context 'ヤフーショッピングAPIにリクエストを送り、レスポンスを受け取る' do
       before do
-        c = Client.new
-        @request = c.add(Request::YahooShopping.search('nikon d800', '4875'))
-        c.send
+        VCR.use_cassette 'yahoo_shopping' do
+          c = Pararest::Client.new
+          @request = c.add(Request::YahooShopping.search('nikon d800', '4875'))
+          c.send
+        end
       end
       describe 'YahooShopping#response' do
         subject { @request.response }

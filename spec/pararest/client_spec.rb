@@ -38,16 +38,16 @@ module Pararest
     end
 
     context 'Clientに存在しないURLのリクエストを追加' do
-      subject {
+      before do
         c = Client.new
-        @req = c.add_get('http://foo.photoxp.jp/')
-        c
-      }
-      describe 'Client#send' do
-        it do
-          expect { subject.send }.to raise_error(Faraday::Error::ClientError)
-        end
+        req = c.add_get('http://foo.photoxp.jp/')
+        c.send
+        @response = req.response
       end
+      describe 'Client#send' do
+        it {expect(@response.status).to eq 0}
+        it {expect(@response.body).to be_empty}
+       end
     end
 
     context 'Clientにgoogle/yahoo/facebookへのリクエストを追加' do

@@ -1,4 +1,3 @@
 require "pararest/version"
-
-module Pararest
-end
+require "pararest/cient"
+require "pararest/request/base"

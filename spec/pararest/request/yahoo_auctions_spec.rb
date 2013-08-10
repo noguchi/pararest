@@ -21,9 +21,11 @@ module Pararest
 
     context 'ヤフオクAPIにリクエストを送り、レスポンスを受け取る' do
       before do
-        c = Client.new
-        @request = c.add(Request::YahooAuctions.search('nikon d800', '2084261634'))
-        c.send
+        VCR.use_cassette 'yahoo_auctions' do
+          c = Pararest::Client.new
+          @request = c.add(Request::YahooAuctions.search('nikon d800', '2084261634'))
+          c.send
+        end
       end
       describe 'YahooAuctions#response' do
         subject { @request.response }

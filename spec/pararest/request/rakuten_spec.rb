@@ -26,9 +26,11 @@ module Pararest
 
     context '楽天APIにリクエストを送り、レスポンスを受け取る' do
       before do
-        c = Client.new
-        @request = c.add(Request::Rakuten.search('nikon d800', '100083'))
-        c.send
+        VCR.use_cassette 'rakuten' do
+          c = Pararest::Client.new
+          @request = c.add(Request::Rakuten.search('nikon d800', '100083'))
+          c.send
+        end
       end
       
       describe 'Rakuten#response' do
