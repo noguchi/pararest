@@ -8,7 +8,6 @@ gem 'guard-rspec'
 gem 'webmock', '< 1.12.0', require: false
 gem 'vcr'
 gem 'ci_reporter'
-gem 'activesupport'
 gem 'coveralls', require: false
 
 gemspec
