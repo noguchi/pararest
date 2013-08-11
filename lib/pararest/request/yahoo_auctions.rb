@@ -76,15 +76,18 @@ module Pararest
         a = []
         return a unless (response && response.body && response.body['ResultSet'] && response.body['ResultSet']['Result'] && response.body['ResultSet']['Result']['Item'])
         response.body['ResultSet']['Result']['Item'].each {|item|
-          m = Hashie::Mash.new
-          m.title = item['Title']
-          m.url = referer_url(item['AuctionItemUrl'])
-          m.price = item['CurrentPrice'].to_i
-          m.image_url = item['Image']
-          m.beacon_url = beacon_url
-          m.bids = item['Bids']
-          m.end_time = Time.parse(item['EndTime'])
-          a << m
+          begin
+            m = Hashie::Mash.new
+            m.title = item['Title']
+            m.url = referer_url(item['AuctionItemUrl'])
+            m.price = item['CurrentPrice'].to_i
+            m.image_url = item['Image']
+            m.beacon_url = beacon_url
+            m.bids = item['Bids']
+            m.end_time = Time.parse(item['EndTime'])
+            a << m
+          rescue
+          end
         }
         a
       end

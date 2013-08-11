@@ -68,14 +68,16 @@ module Pararest
         a = []
         return a unless (response && response.body && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result'])
         response.body['ResultSet']['0']['Result'].each {|key, item|
-          next unless /^\d+$/ =~ key && item.size > 1
-          m = Hashie::Mash.new
-          m.title = item['Name']
-          m.url = item['Url']
-          m.price = item['Price']['_value'].to_i
-          m.image_url = item['Image']['Medium']
-          m.beacon_url = beacon_url
-          a << m
+          begin
+            m = Hashie::Mash.new
+            m.title = item['Name']
+            m.url = item['Url']
+            m.price = item['Price']['_value'].to_i
+            m.image_url = item['Image']['Medium']
+            m.beacon_url = beacon_url
+            a << m
+          rescue
+          end
         }
         a
       end
