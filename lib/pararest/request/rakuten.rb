@@ -57,7 +57,7 @@ module Pararest
 
       def items
         a = []
-        return a unless (response && response.body['Items'])
+        return a unless (response && response.body && response.body['Items'])
         response.body['Items'].each {|e|
           item = e['Item']
           m = Hashie::Mash.new

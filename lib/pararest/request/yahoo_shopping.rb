@@ -66,7 +66,7 @@ module Pararest
 
       def items
         a = []
-        return a unless (response && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result'])
+        return a unless (response && response.body && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result'])
         response.body['ResultSet']['0']['Result'].each {|key, item|
           next unless /^\d+$/ =~ key
           m = Hashie::Mash.new
