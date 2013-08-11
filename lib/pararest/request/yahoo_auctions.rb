@@ -73,7 +73,7 @@ module Pararest
           m.image_url = item['Image']
           m.beacon_url = beacon_url
           m.bids = item['Bids']
-          m.end_time = item['EndTime']
+          m.end_time = Time.parse(item['EndTime'])
           a << m
         }
         a
