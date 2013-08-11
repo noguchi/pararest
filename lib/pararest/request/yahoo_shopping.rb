@@ -29,7 +29,17 @@ module Pararest
         yield config
       end
 
-      def self.search(keyword, category_id)
+      CATEGORY_ALIAS = {
+        camera: 2443,
+        lens: 2465,
+        software: 150,
+        all: 0,
+      }
+
+      def self.search(keyword, category_id = :all)
+        if CATEGORY_ALIAS.has_key?(category_id)
+          category_id = CATEGORY_ALIAS[category_id]
+        end
         YahooShopping.new("#{YahooShopping.config.base_url}itemSearch", {
           appid: YahooShopping.config.yahoo_japan_appid,
           affiliate_type: "vc",

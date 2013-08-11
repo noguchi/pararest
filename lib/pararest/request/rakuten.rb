@@ -29,12 +29,22 @@ module Pararest
         yield config
       end
 
-      def self.search(keyword, genre_id)
+      CATEGORY_ALIAS = {
+        camera: 100083,
+        lens: 110335,
+        software: 100103,
+        all: 0,
+      }
+
+      def self.search(keyword, category_id = :all)
+        if CATEGORY_ALIAS.has_key?(category_id)
+          category_id = CATEGORY_ALIAS[category_id]
+        end
         Rakuten.new("#{Rakuten.config.base_url}Search/#{Rakuten.config.version}", {
           'applicationId' => Rakuten.config.application_id,
           'affiliateId' => Rakuten.config.affiliate_id,
           'keyword' => keyword,
-          'genreId' => genre_id,
+          'genreId' => category_id,
           'sort' => 'standard',
           'callback' => 'loaded',
         })

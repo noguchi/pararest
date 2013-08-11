@@ -29,7 +29,17 @@ module Pararest
         yield config
       end
 
-      def self.search(keyword, category_id)
+      CATEGORY_ALIAS = {
+        camera: 23636,
+        lens: 23684,
+        software: 23568,
+        all: 0,
+      }
+
+      def self.search(keyword, category_id = :all)
+        if CATEGORY_ALIAS.has_key?(category_id)
+          category_id = CATEGORY_ALIAS[category_id]
+        end
         YahooAuctions.new("#{YahooAuctions.config.base_url}search", {
           appid: YahooAuctions.config.yahoo_japan_appid,
           type: 'all',
