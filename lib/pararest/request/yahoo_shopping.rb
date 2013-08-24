@@ -52,7 +52,11 @@ module Pararest
       end
 
       def response_filter(response)
-        response.env[:body] = MultiJson.load(response.env[:body].gsub! /^loaded\((.*)\);?$/m, '\\1')
+        begin
+          response.env[:body] = MultiJson.load(response.env[:body].gsub! /^loaded\((.*)\);?$/m, '\\1')
+        rescue
+          response.env[:body] = nil
+        end
         response
       end
 
