@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/noguchi/pararest.png?branch=master)](https://travis-ci.org/noguchi/pararest)
 [![Coverage Status](https://coveralls.io/repos/noguchi/pararest/badge.png)](https://coveralls.io/r/noguchi/pararest)
 [![Dependency Status](https://gemnasium.com/noguchi/pararest.png)](https://gemnasium.com/noguchi/pararest)
+[![Code Climate](https://codeclimate.com/github/noguchi/pararest.png)](https://codeclimate.com/github/noguchi/pararest)
 
 # Pararest
 
