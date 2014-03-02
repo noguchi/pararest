@@ -1,7 +1,7 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'pararest/version'
+require "pararest/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pararest"
@@ -20,10 +20,13 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-  spec.add_dependency 'faraday'
-  spec.add_dependency 'typhoeus'
-  spec.add_dependency 'multi_json'
-  spec.add_dependency 'multi_xml'
-  spec.add_dependency 'activesupport'
-  spec.add_dependency 'hashie'
+  # 一時的な処置
+  spec.add_dependency "faraday", "< 0.9"
+  spec.add_dependency "mime-types", "< 2.0"
+
+  spec.add_dependency "typhoeus"
+  spec.add_dependency "multi_json"
+  spec.add_dependency "multi_xml"
+  spec.add_dependency "activesupport"
+  spec.add_dependency "hashie"
 end
