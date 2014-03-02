@@ -1,3 +1,5 @@
+require "rexml/document"
+
 module Pararest
   module Request
     class YahooAuctions < Base
@@ -46,14 +48,13 @@ module Pararest
           sort: 'bids',
           query: keyword,
           category: category_id,
-          callback: 'loaded',
-          output: 'json',
+          output: 'xml',
         })
       end
 
       def response_filter(response)
         begin
-          response.env[:body] = MultiJson.load(response.env[:body].gsub! /^loaded\((.*)\);?$/m, '\\1')
+          response.env[:body] = MultiXml.parse(response.env[:body])
         rescue
           response.env[:body] = nil
         end
@@ -85,12 +86,15 @@ module Pararest
             m.title = item['Title']
             m.url = referer_url(item['AuctionItemUrl'])
             m.price = item['CurrentPrice'].to_i
-            m.image_url = item['Image']
+            m.image_url = item['Image']['__content__']
+            m.image_width = item['Image']['width']
+            m.image_height = item['Image']['height']
             m.beacon_url = beacon_url
             m.bids = item['Bids']
             m.end_time = Time.parse(item['EndTime'])
             a << m
-          rescue
+          rescue => e
+            p e
           end
         }
         a

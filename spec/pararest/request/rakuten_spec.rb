@@ -12,7 +12,7 @@ module Pararest
       subject { Request::Rakuten.search('nikon d800', '100083') }
 
       describe 'Rakuten#url' do
-        it { expect(subject.url).to eq "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130424" }
+        it { expect(subject.url).to eq "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130805" }
       end
 
       describe 'Rakuten#params' do

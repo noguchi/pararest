@@ -7,7 +7,7 @@ module Pararest
         attr_accessor :base_url, :version, :application_id, :affiliate_id
         @@defaults = {
           base_url: 'https://app.rakuten.co.jp/services/api/IchibaItem/',
-          version: "20130424",
+          version: "20130805",
           application_id: nil,
           affiliate_id: nil,
         }
@@ -66,6 +66,8 @@ module Pararest
             m.url = item['itemUrl']
             m.price = item['itemPrice'].to_i
             m.image_url = item['mediumImageUrls'].first['imageUrl']
+            m.image_width = '128'
+            m.image_height = '128'
             m.beacon_url = nil
             a << m
           rescue

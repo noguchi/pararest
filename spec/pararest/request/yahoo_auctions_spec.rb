@@ -41,15 +41,15 @@ module Pararest
 
       describe 'YahooAuctions#response.body' do
         subject { @request.response.body }
-        it 'Itemの個数が50' do
-          expect(subject['ResultSet']['Result']['Item'].size).to eq 50
+        it 'Itemの個数が20' do
+          expect(subject['ResultSet']['Result']['Item'].size).to eq 20
         end
       end
 
       describe 'YahooAuctions#items' do
         subject { @request.items }
-        it 'items.size = 50' do
-          expect(subject.size).to eq 50
+        it 'items.size = 20' do
+          expect(subject.size).to eq 20
         end
       end
 

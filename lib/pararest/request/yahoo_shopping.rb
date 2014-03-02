@@ -48,6 +48,7 @@ module Pararest
           query: keyword,
           type: 'all',
           category_id: category_id,
+          image_size: '300',
         })
       end
 
@@ -77,7 +78,15 @@ module Pararest
             m.title = item['Name']
             m.url = item['Url']
             m.price = item['Price']['_value'].to_i
-            m.image_url = item['Image']['Medium']
+            if item['ExImage']
+              m.image_url = item['ExImage']['Url']
+              m.image_width = item['ExImage']['Width']
+              m.image_height = item['ExImage']['Height']
+            else
+              m.image_url = item['Image']['Medium']
+              m.image_width = '146'
+              m.image_height = '146'
+            end
             m.beacon_url = beacon_url
             a << m
           rescue
