@@ -91,6 +91,7 @@ module Pararest
         response.body['ResultSet']['Result']['Item'].each {|item|
           begin
             m = Hashie::Mash.new
+            m.auction_id = item['AuctionID']
             m.title = item['Title']
             m.url = referer_url(item['AuctionItemUrl'])
             m.price = item['CurrentPrice'].to_i
