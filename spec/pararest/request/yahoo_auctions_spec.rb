@@ -21,7 +21,7 @@ module Pararest
       end
     end
 
-    context 'ヤフオクAPIにリクエストを送り、レスポンスを受け取る' do
+    context 'ヤフオクAPIに検索リクエストを送り、レスポンスを受け取る' do
       before do
         VCR.use_cassette 'yahoo_auctions' do
           c = Pararest::Client.new
@@ -34,7 +34,7 @@ module Pararest
         it 'statusが200 OK' do
           expect(subject.env[:status]).to eq 200
         end
-        it 'bodyがMultiJsonでparseしたHashのインスタンス' do
+        it 'bodyがMultiXmlでparseしたHashのインスタンス' do
           expect(subject.body).to be_an_instance_of(Hash)
         end
       end
@@ -52,10 +52,42 @@ module Pararest
           expect(subject.size).to eq 20
         end
       end
+    end
 
-      describe 'YahooAuctions#items.first' do
-        it 'items.first' do
-#          @request.items.first
+    context 'ヤフオクAPIへの商品詳細リクエスト作成' do
+      subject { Request::YahooAuctions.detail('x338641869') }
+
+      describe 'YahooAuctions#url' do
+        it { expect(subject.url).to eq "http://auctions.yahooapis.jp/AuctionWebService/V2/auctionItem" }
+      end
+
+      describe 'YahooAuctions#params' do
+        it { expect(subject.params).to include(appid: "testappid", auctionID: "x338641869") }
+      end
+    end
+
+    context 'ヤフオクAPIに商品詳細リクエストを送り、レスポンスを受け取る' do
+      before do
+        VCR.use_cassette 'yahoo_auctions_detail' do
+          c = Pararest::Client.new
+          @request = c.add(Request::YahooAuctions.detail('x338641869'))
+          c.send
+        end
+      end
+      describe 'YahooAuctions#response' do
+        subject { @request.response }
+        it 'statusが200 OK' do
+          expect(subject.env[:status]).to eq 200
+        end
+        it 'bodyがMultiXmlでparseしたHashのインスタンス' do
+          expect(subject.body).to be_an_instance_of(Hash)
+        end
+      end
+
+      describe 'YahooAuctions#response.body' do
+        subject { @request.response.body }
+        it '画像の情報が取得できる' do
+          expect(subject['ResultSet']['Result']['Img']['Image1'].keys).to include("__content__", "width", "height", "alt")
         end
       end
     end

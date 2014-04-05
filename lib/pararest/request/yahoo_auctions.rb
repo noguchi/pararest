@@ -52,6 +52,14 @@ module Pararest
         })
       end
 
+      def self.detail(auction_id)
+        YahooAuctions.new("#{YahooAuctions.config.base_url}auctionItem", {
+          appid: YahooAuctions.config.yahoo_japan_appid,
+          auctionID: auction_id,
+          output: 'xml',
+        })
+      end
+
       def response_filter(response)
         begin
           response.env[:body] = MultiXml.parse(response.env[:body])
