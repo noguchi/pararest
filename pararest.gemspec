@@ -20,10 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-  # 一時的な処置
-  spec.add_dependency "faraday", "< 0.9"
-  spec.add_dependency "mime-types", "< 2.0"
-
+  spec.add_dependency "faraday"
+  spec.add_dependency "mime-types"
   spec.add_dependency "typhoeus"
   spec.add_dependency "multi_json"
   spec.add_dependency "multi_xml"
