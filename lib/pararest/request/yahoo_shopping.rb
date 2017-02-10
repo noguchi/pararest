@@ -6,10 +6,10 @@ module Pararest
 
         attr_accessor :base_url, :yahoo_japan_appid, :valuecommerce_pid, :valuecommerce_sid
         @@defaults = {
-          base_url: 'http://shopping.yahooapis.jp/ShoppingWebService/V1/json/',
+          base_url: 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/',
           yahoo_japan_appid: nil,
           valuecommerce_sid: nil,
-          valuecommerce_pid: nil,
+          valuecommerce_pid: nil
         }
 
         def self.defaults
@@ -17,7 +17,7 @@ module Pararest
         end
 
         def initialize
-          @@defaults.each_pair{|k,v| self.send("#{k}=",v)}
+          @@defaults.each_pair { |k, v| send("#{k}=", v) }
         end
       end
 
@@ -33,28 +33,26 @@ module Pararest
         camera: 2443,
         lens: 2465,
         software: 150,
-        all: 0,
-      }
+        all: 0
+      }.freeze
 
       def self.search(keyword, category_id = :all)
-        if CATEGORY_ALIAS.has_key?(category_id)
+        if CATEGORY_ALIAS.key?(category_id)
           category_id = CATEGORY_ALIAS[category_id]
         end
-        YahooShopping.new("#{YahooShopping.config.base_url}itemSearch", {
-          appid: YahooShopping.config.yahoo_japan_appid,
-          affiliate_type: "vc",
-          affiliate_id: "http%3A%2F%2Fck.jp.ap.valuecommerce.com%2Fservlet%2Freferral%3Fsid%3D#{YahooShopping.config.valuecommerce_sid}%26pid%3D#{YahooShopping.config.valuecommerce_pid}%26vc_url%3D",
-          callback: 'loaded',
-          query: keyword,
-          type: 'all',
-          category_id: category_id,
-          image_size: '300',
-        })
+        YahooShopping.new("#{YahooShopping.config.base_url}itemSearch", appid: YahooShopping.config.yahoo_japan_appid,
+                                                                        affiliate_type: 'vc',
+                                                                        affiliate_id: "http%3A%2F%2Fck.jp.ap.valuecommerce.com%2Fservlet%2Freferral%3Fsid%3D#{YahooShopping.config.valuecommerce_sid}%26pid%3D#{YahooShopping.config.valuecommerce_pid}%26vc_url%3D",
+                                                                        callback: 'loaded',
+                                                                        query: keyword,
+                                                                        type: 'all',
+                                                                        category_id: category_id,
+                                                                        image_size: '600')
       end
 
       def response_filter(response)
         begin
-          response.env[:body] = MultiJson.load(response.env[:body].gsub! /^loaded\((.*)\);?$/m, '\\1')
+          response.env[:body] = MultiJson.load(response.env[:body].gsub!(/loaded\((.*)\);?$/m, '\\1'))
         rescue
           response.env[:body] = nil
         end
@@ -64,26 +62,24 @@ module Pararest
       def beacon_url
         if YahooShopping.config.valuecommerce_sid && YahooShopping.config.valuecommerce_pid
           "http://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=#{YahooShopping.config.valuecommerce_sid}&pid=#{YahooShopping.config.valuecommerce_pid}"
-        else
-          nil
         end
       end
 
       def items
         a = []
-        return a unless (response && response.body && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result'])
-        response.body['ResultSet']['0']['Result'].each {|key, item|
+        return a unless response && response.body && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result']
+        response.body['ResultSet']['0']['Result'].each do |_key, item|
           begin
             m = Hashie::Mash.new
             m.title = item['Name']
-            m.url = item['Url']
+            m.url = ssl(item['Url'])
             m.price = item['Price']['_value'].to_i
             if item['ExImage']
-              m.image_url = item['ExImage']['Url']
+              m.image_url = ssl(item['ExImage']['Url'])
               m.image_width = item['ExImage']['Width']
               m.image_height = item['ExImage']['Height']
             else
-              m.image_url = item['Image']['Medium']
+              m.image_url = ssl(item['Image']['Medium'])
               m.image_width = '146'
               m.image_height = '146'
             end
@@ -91,7 +87,7 @@ module Pararest
             a << m
           rescue
           end
-        }
+        end
         a
       end
     end

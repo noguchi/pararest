@@ -11,4 +11,3 @@ require 'pararest/request/base'
 require 'pararest/request/rakuten'
 require 'pararest/request/yahoo_auctions'
 require 'pararest/request/yahoo_shopping'
-

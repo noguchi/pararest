@@ -10,9 +10,7 @@ module Pararest
         @filtered = false
       end
 
-      def response=(response)
-        @response = response
-      end
+      attr_writer :response
 
       def response
         unless @filtered
@@ -24,6 +22,10 @@ module Pararest
 
       def response_filter(response)
         response
+      end
+
+      def ssl(url)
+        url.gsub('http:', 'https:')
       end
     end
   end

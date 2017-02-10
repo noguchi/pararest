@@ -1,15 +1,16 @@
 source 'https://rubygems.org'
 
 group :development, :test do
+  gem 'rubocop', require: false
+  gem 'meowcop', require: false
   gem 'bundler'
+  gem 'guard-rspec'
+  gem 'guard-rubocop'
+  gem 'rspec'
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
-  gem 'rspec'
-  gem 'guard-rspec'
-  gem 'webmock', '< 1.12.0', require: false
   gem 'vcr'
-  gem 'ci_reporter'
-  gem 'coveralls', require: false
+  gem 'webmock', require: false
 end
 
 gemspec

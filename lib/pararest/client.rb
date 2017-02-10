@@ -7,7 +7,7 @@ module Pararest
 
       @@defaults = {
         timeout: 4,
-        open_timeout: 2,
+        open_timeout: 2
       }
 
       def self.defaults
@@ -15,7 +15,7 @@ module Pararest
       end
 
       def initialize
-        @@defaults.each_pair{|k,v| self.send("#{k}=",v)}
+        @@defaults.each_pair { |k, v| send("#{k}=", v) }
       end
     end
 
@@ -33,11 +33,11 @@ module Pararest
       @requests = []
       @options = {
         timeout: Client.config.timeout,
-        open_timeout: Client.config.open_timeout,
-        }.merge(options)
+        open_timeout: Client.config.open_timeout
+      }.merge(options)
       @connection = Faraday.new do |builder|
         builder.use Faraday::Adapter::Typhoeus
- #       builder.response :logger
+        #       builder.response :logger
       end
       @connection.options.merge(@options)
     end
@@ -53,9 +53,9 @@ module Pararest
 
     def send
       @connection.in_parallel do
-        @requests.each {|request|
+        @requests.each do |request|
           request.response = @connection.get request.url, request.params
-        }
+        end
       end
     end
   end

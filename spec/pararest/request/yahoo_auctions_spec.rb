@@ -1,23 +1,23 @@
-require "spec_helper"
-require "pararest"
+require 'spec_helper'
+require 'pararest'
 
 module Pararest
   describe Request::YahooAuctions do
     Request::YahooAuctions.configure do |c|
-      c.yahoo_japan_appid = "testappid"
-      c.valuecommerce_sid = "12345"
-      c.valuecommerce_pid = "67890"
+      c.yahoo_japan_appid = 'testappid'
+      c.valuecommerce_sid = '12345'
+      c.valuecommerce_pid = '67890'
     end
 
     context 'ヤフオクAPIへの検索リクエスト作成' do
       subject { Request::YahooAuctions.search('nikon d800', '2084261634') }
 
       describe 'YahooAuctions#url' do
-        it { expect(subject.url).to eq "http://auctions.yahooapis.jp/AuctionWebService/V2/search" }
+        it { expect(subject.url).to eq 'https://auctions.yahooapis.jp/AuctionWebService/V2/search' }
       end
 
       describe 'YahooAuctions#params' do
-        it { expect(subject.params).to include(appid: "testappid", type: "all", sort: "bids", query: "nikon d800", category: "2084261634") }
+        it { expect(subject.params).to include(appid: 'testappid', type: 'all', sort: 'bids', query: 'nikon d800', category: '2084261634') }
       end
     end
 
@@ -58,11 +58,11 @@ module Pararest
       subject { Request::YahooAuctions.detail('x338641869') }
 
       describe 'YahooAuctions#url' do
-        it { expect(subject.url).to eq "http://auctions.yahooapis.jp/AuctionWebService/V2/auctionItem" }
+        it { expect(subject.url).to eq 'https://auctions.yahooapis.jp/AuctionWebService/V2/auctionItem' }
       end
 
       describe 'YahooAuctions#params' do
-        it { expect(subject.params).to include(appid: "testappid", auctionID: "x338641869") }
+        it { expect(subject.params).to include(appid: 'testappid', auctionID: 'x338641869') }
       end
     end
 
@@ -70,7 +70,7 @@ module Pararest
       before do
         VCR.use_cassette 'yahoo_auctions_detail' do
           c = Pararest::Client.new
-          @request = c.add(Request::YahooAuctions.detail('x338641869'))
+          @request = c.add(Request::YahooAuctions.detail('b245863719'))
           c.send
         end
       end
@@ -87,7 +87,7 @@ module Pararest
       describe 'YahooAuctions#response.body' do
         subject { @request.response.body }
         it '画像の情報が取得できる' do
-          expect(subject['ResultSet']['Result']['Img']['Image1'].keys).to include("__content__", "width", "height", "alt")
+          expect(subject['ResultSet']['Result']['Img']['Image1'].keys).to include('__content__', 'width', 'height', 'alt')
         end
       end
     end

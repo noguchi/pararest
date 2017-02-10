@@ -1,5 +1,5 @@
-require "spec_helper"
-require "pararest"
+require 'spec_helper'
+require 'pararest'
 
 module Pararest
   describe Client do
@@ -21,11 +21,11 @@ module Pararest
     end
 
     context 'Clientにwww.yahoo.co.jpへのリクエストを追加' do
-      subject {
+      subject do
         c = Client.new
         @req = c.add_get('http://www.yahoo.co.jp/')
         c
-      }
+      end
       describe 'Client#requests.size' do
         it { expect(subject.requests.size).to eq 1 }
       end
@@ -45,19 +45,19 @@ module Pararest
         @response = req.response
       end
       describe 'Client#send' do
-        it {expect(@response.status).to eq 0}
-        it {expect(@response.body).to be_empty}
-       end
+        it { expect(@response.status).to eq 0 }
+        it { expect(@response.body).to be_empty }
+      end
     end
 
     context 'Clientにgoogle/yahoo/facebookへのリクエストを追加' do
-      subject {
+      subject do
         c = Client.new
         @google = c.add_get('http://www.google.co.jp/')
         @yahoo = c.add_get('http://www.yahoo.co.jp/')
         @facebook = c.add_get('https://www.facebook.com/')
         c
-      }
+      end
       describe 'Client#requests.size' do
         it { expect(subject.requests.size).to eq 3 }
       end

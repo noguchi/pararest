@@ -1,0 +1,9 @@
+inherit_gem:
+  meowcop:
+    - config/rubocop.yml
+
+Metrics/LineLength:
+  Max: 300
+
+Metrics/PerceivedComplexity:
+  Max: 10

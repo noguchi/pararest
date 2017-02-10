@@ -1,26 +1,28 @@
-require "spec_helper"
-require "pararest"
+require 'spec_helper'
+require 'pararest'
 
 module Pararest
   describe Request::Rakuten do
     Request::Rakuten.configure do |c|
-      c.application_id = "1234567890acbdefghijklmnopqrstuv"
-      c.affiliate_id = ""
+      c.application_id = '1047605627593644284'
+      c.affiliate_id = ''
     end
 
     context '楽天APIへの検索リクエスト作成' do
       subject { Request::Rakuten.search('nikon d800', '100083') }
 
       describe 'Rakuten#url' do
-        it { expect(subject.url).to eq "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20130805" }
+        it { expect(subject.url).to eq 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20140222' }
       end
 
       describe 'Rakuten#params' do
-        it { expect(subject.params).to include(
-          "applicationId" => "1234567890acbdefghijklmnopqrstuv",
-          "genreId" => "100083",
-          "keyword" => "nikon d800",
-        ) }
+        it do
+          expect(subject.params).to include(
+            'applicationId' => '1047605627593644284',
+            'genreId' => '100083',
+            'keyword' => 'nikon d800'
+          )
+        end
       end
     end
 
@@ -32,7 +34,7 @@ module Pararest
           c.send
         end
       end
-      
+
       describe 'Rakuten#response' do
         subject { @request.response }
         it 'statusが200 OK' do

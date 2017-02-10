@@ -1,27 +1,29 @@
-require "spec_helper"
-require "pararest"
+require 'spec_helper'
+require 'pararest'
 
 module Pararest
   describe Request::YahooShopping do
     Request::YahooShopping.configure do |c|
-      c.yahoo_japan_appid = "testappid"
-      c.valuecommerce_sid = "12345"
-      c.valuecommerce_pid = "67890"
+      c.yahoo_japan_appid = 'testappid'
+      c.valuecommerce_sid = '12345'
+      c.valuecommerce_pid = '67890'
     end
 
     context 'ヤフーショッピングAPIへの検索リクエスト作成' do
-      subject { Request::YahooShopping.search('nikon d800', '4875') }
+      subject { Request::YahooShopping.search('nikon d810', '47733') }
 
       describe 'YahooShopping#url' do
-        it { expect(subject.url).to eq "http://shopping.yahooapis.jp/ShoppingWebService/V1/json/itemSearch" }
+        it { expect(subject.url).to eq 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/itemSearch' }
       end
 
       describe 'YahooShopping#params' do
-        it { expect(subject.params).to include(
-          appid: "testappid",
-          category_id: "4875",
-          query: "nikon d800",
-        ) }
+        it do
+          expect(subject.params).to include(
+            appid: 'testappid',
+            category_id: '47733',
+            query: 'nikon d810'
+          )
+        end
       end
     end
 
@@ -29,7 +31,7 @@ module Pararest
       before do
         VCR.use_cassette 'yahoo_shopping' do
           c = Pararest::Client.new
-          @request = c.add(Request::YahooShopping.search('nikon d800', '4875'))
+          @request = c.add(Request::YahooShopping.search('nikon d810', '47733'))
           c.send
         end
       end
