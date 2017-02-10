@@ -6,12 +6,10 @@ module Pararest
       class Configuration
         include Singleton
 
-        attr_accessor :base_url, :yahoo_japan_appid, :valuecommerce_pid, :valuecommerce_sid
+        attr_accessor :base_url, :yahoo_japan_appid
         @@defaults = {
           base_url: 'https://auctions.yahooapis.jp/AuctionWebService/V2/',
-          yahoo_japan_appid: nil,
-          valuecommerce_sid: nil,
-          valuecommerce_pid: nil
+          yahoo_japan_appid: nil
         }
 
         def self.defaults
@@ -66,17 +64,11 @@ module Pararest
       end
 
       def referer_url(url)
-        if YahooAuctions.config.valuecommerce_sid && YahooAuctions.config.valuecommerce_pid
-          "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=#{YahooAuctions.config.valuecommerce_sid}&pid=#{YahooAuctions.config.valuecommerce_pid}&vc_url=#{CGI.escape(url)}"
-        else
-          url
-        end
+        url
       end
 
       def beacon_url
-        if YahooAuctions.config.valuecommerce_sid && YahooAuctions.config.valuecommerce_pid
-          "https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=#{YahooAuctions.config.valuecommerce_sid}&pid=#{YahooAuctions.config.valuecommerce_pid}"
-        end
+        nil
       end
 
       def items

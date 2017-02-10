@@ -5,8 +5,6 @@ module Pararest
   describe Request::YahooAuctions do
     Request::YahooAuctions.configure do |c|
       c.yahoo_japan_appid = 'testappid'
-      c.valuecommerce_sid = '12345'
-      c.valuecommerce_pid = '67890'
     end
 
     context 'ヤフオクAPIへの検索リクエスト作成' do
