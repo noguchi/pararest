@@ -61,7 +61,7 @@ module Pararest
 
       def beacon_url
         if YahooShopping.config.valuecommerce_sid && YahooShopping.config.valuecommerce_pid
-          "http://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=#{YahooShopping.config.valuecommerce_sid}&pid=#{YahooShopping.config.valuecommerce_pid}"
+          "https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=#{YahooShopping.config.valuecommerce_sid}&pid=#{YahooShopping.config.valuecommerce_pid}"
         end
       end
 
