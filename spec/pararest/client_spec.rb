@@ -23,7 +23,7 @@ module Pararest
     context 'Clientにwww.yahoo.co.jpへのリクエストを追加' do
       subject do
         c = Client.new
-        @req = c.add_get('http://www.yahoo.co.jp/')
+        @req = c.add_get('https://www.yahoo.co.jp/')
         c
       end
       describe 'Client#requests.size' do
@@ -40,7 +40,7 @@ module Pararest
     context 'Clientに存在しないURLのリクエストを追加' do
       before do
         c = Client.new
-        req = c.add_get('http://foo.photoxp.jp/')
+        req = c.add_get('https://foo.photoxp.jp/')
         c.send
         @response = req.response
       end
@@ -53,8 +53,8 @@ module Pararest
     context 'Clientにgoogle/yahoo/facebookへのリクエストを追加' do
       subject do
         c = Client.new
-        @google = c.add_get('http://www.google.co.jp/')
-        @yahoo = c.add_get('http://www.yahoo.co.jp/')
+        @google = c.add_get('https://www.google.co.jp/')
+        @yahoo = c.add_get('https://www.yahoo.co.jp/')
         @facebook = c.add_get('https://www.facebook.com/')
         c
       end
