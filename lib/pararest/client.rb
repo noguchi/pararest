@@ -36,8 +36,7 @@ module Pararest
         open_timeout: Client.config.open_timeout
       }.merge(options)
       @connection = Faraday.new do |builder|
-        builder.use Faraday::Adapter::Typhoeus
-        #       builder.response :logger
+        builder.adapter :typhoeus
       end
       @connection.options.merge(@options)
     end
