@@ -1,3 +1,7 @@
+require 'faraday'
+require 'typhoeus'
+require 'typhoeus/adapters/faraday'
+
 module Pararest
   class Client
     class Configuration
