@@ -10,10 +10,10 @@ module Pararest
     end
 
     context 'ヤフーショッピングAPIへの検索リクエスト作成' do
-      subject { Request::YahooShopping.search('nikon d810', '47733') }
+      subject { Request::YahooShopping.search('nikon d780', '47733') }
 
       describe 'YahooShopping#url' do
-        it { expect(subject.url).to eq 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/itemSearch' }
+        it { expect(subject.url).to eq 'https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch' }
       end
 
       describe 'YahooShopping#params' do
@@ -21,7 +21,7 @@ module Pararest
           expect(subject.params).to include(
             appid: 'testappid',
             category_id: '47733',
-            query: 'nikon d810'
+            query: 'nikon d780'
           )
         end
       end
@@ -31,7 +31,7 @@ module Pararest
       before do
         VCR.use_cassette 'yahoo_shopping' do
           c = Pararest::Client.new
-          @request = c.add(Request::YahooShopping.search('nikon d810', '47733'))
+          @request = c.add(Request::YahooShopping.search('nikon d780', '47733'))
           c.send
         end
       end

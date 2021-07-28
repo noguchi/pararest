@@ -6,7 +6,7 @@ module Pararest
 
         attr_accessor :base_url, :yahoo_japan_appid, :valuecommerce_pid, :valuecommerce_sid
         @@defaults = {
-          base_url: 'https://shopping.yahooapis.jp/ShoppingWebService/V1/json/',
+          base_url: 'https://shopping.yahooapis.jp/ShoppingWebService/V3/',
           yahoo_japan_appid: nil,
           valuecommerce_sid: nil,
           valuecommerce_pid: nil
@@ -43,7 +43,6 @@ module Pararest
         YahooShopping.new("#{YahooShopping.config.base_url}itemSearch", appid: YahooShopping.config.yahoo_japan_appid,
                                                                         affiliate_type: 'vc',
                                                                         affiliate_id: "http%3A%2F%2Fck.jp.ap.valuecommerce.com%2Fservlet%2Freferral%3Fsid%3D#{YahooShopping.config.valuecommerce_sid}%26pid%3D#{YahooShopping.config.valuecommerce_pid}%26vc_url%3D",
-                                                                        callback: 'loaded',
                                                                         query: keyword,
                                                                         type: 'all',
                                                                         category_id: category_id,
@@ -51,11 +50,7 @@ module Pararest
       end
 
       def response_filter(response)
-        begin
-          response.env[:body] = MultiJson.load(response.env[:body].gsub!(/loaded\((.*)\);?$/m, '\\1'))
-        rescue
-          response.env[:body] = nil
-        end
+        response.env[:body] = MultiJson.load(response.env[:body])
         response
       end
 
@@ -67,22 +62,16 @@ module Pararest
 
       def items
         a = []
-        return a unless response && response.body && response.body['ResultSet'] && response.body['ResultSet']['0'] && response.body['ResultSet']['0']['Result']
-        response.body['ResultSet']['0']['Result'].each do |_key, item|
+        return a unless response && response.body && response.body['hits']
+        response.body['hits'].each do |item|
           begin
             m = Hashie::Mash.new
-            m.title = item['Name']
-            m.url = ssl(item['Url'])
-            m.price = item['Price']['_value'].to_i
-            if item['ExImage']
-              m.image_url = ssl(item['ExImage']['Url'])
-              m.image_width = item['ExImage']['Width']
-              m.image_height = item['ExImage']['Height']
-            else
-              m.image_url = ssl(item['Image']['Medium'])
-              m.image_width = '146'
-              m.image_height = '146'
-            end
+            m.title = item['name']
+            m.url = ssl(item['url'])
+            m.price = item['price']
+            m.image_url = ssl(item['exImage']['url'])
+            m.image_width = item['exImage']['width']
+            m.image_height = item['exImage']['height']
             m.beacon_url = beacon_url
             a << m
           rescue
