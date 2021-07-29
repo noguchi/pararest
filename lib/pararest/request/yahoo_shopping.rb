@@ -30,10 +30,10 @@ module Pararest
       end
 
       CATEGORY_ALIAS = {
-        camera: 2443,
-        lens: 2465,
-        software: 150,
-        all: 0
+        camera: '47733,19800',
+        lens: '2465',
+        software: '150',
+        all: '0'
       }.freeze
 
       def self.search(keyword, category_id = :all)
